@@ -34,10 +34,11 @@ class UsuarioRepository
             'SELECT id, nome, email FROM usuarios WHERE id = :id'
         );
         $stmt->execute([':id' => $id]);
+
         $dados = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$dados){
-            return null;
+            throw new IdNaoEncontratoException();
         }
 
         return new UsuarioEntity(

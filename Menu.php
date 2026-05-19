@@ -117,18 +117,20 @@ class Menu{
         echo "+----------------------------+\n";
         echo "| > INSIRA O ID DO USUÁRIO:\n";
         echo "| ". $id = readline();
+        $editarUsuario = null;
+        $nomeUsuario = null;
+        $emailUsuario = null;
+         try{
 
-        try {
-            if(is_null($id)){
-                throw new IdNaoEncontratoException();
-            }
-        }catch (IdNaoEncontratoException $e){
-            echo $e->getMessage();
-        }
+             $editarUsuario = $usuarioRepository->buscarPorId($id);
 
-            $editarUsuario = $usuarioRepository->buscarPorId($id);
-            $nomeUsuario = $editarUsuario->getNome();
-            $emailUsuario = $editarUsuario->getEmail();
+             $nomeUsuario = $editarUsuario->getNome();
+             $emailUsuario = $editarUsuario->getEmail();
+
+         }catch(IdNaoEncontratoException $e){
+             echo PHP_EOL. $e->getMessage() .PHP_EOL;
+         }
+
 
         echo "\n| ";
         echo "". $emailUsuario ." - " . $nomeUsuario ."\n";
