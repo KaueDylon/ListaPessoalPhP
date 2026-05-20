@@ -7,9 +7,9 @@ class Database{
     public static function getConnection(): PDO{
         if (self::$instance === null){
             self::$instance = new PDO(
-                dsn: getenv('DSN'),
-                username: getenv('USERNAME'),
-                password: getenv('PASSWORD'),
+                dsn: "pgsql:host=localhost;port=5432;dbname=phpbanco", //getenv('DSN'),
+                username: "postgres", //getenv('USERNAME'),
+                password: "postgres", //getenv('PASSWORD'),
                 options: [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
