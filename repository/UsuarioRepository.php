@@ -33,6 +33,7 @@ class UsuarioRepository
         $stmt = $this->pdo->prepare(
             'SELECT id, nome, email FROM usuarios WHERE id = :id'
         );
+
         $stmt->execute([':id' => $id]);
 
         $dados = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -57,11 +58,11 @@ class UsuarioRepository
             }
         }catch (PaginacaoException $e){
             echo  "| ".$e->getMessage() . "\n";
-        } finally {
             $pagina = 1;
+        } finally {
+            $offset = ($pagina - 1) * $porPagina;
         }
 
-        $offset = ($pagina - 1) * $porPagina;
 
         $stmt = $this->pdo->prepare(
                 'SELECT id, nome, email, (SELECT COUNT(id) as pag FROM usuarios) FROM usuarios

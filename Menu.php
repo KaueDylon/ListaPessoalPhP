@@ -190,9 +190,22 @@ class Menu{
         echo "+----------------------------+\n";
         echo "| > INSIRA O ID DO USUÁRIO:\n";
         echo "| ". $id = readline();
-        $deletarUsuario = $usuarioRepository->buscarPorId($id);
+        $deletarUsuario = null;
+        $nomeUsuario = null;
+        $emailUsuario = null;
+        try{
+
+            $deletarUsuario = $usuarioRepository->buscarPorId($id);
+
+            $nomeUsuario = $deletarUsuario->getNome();
+            $emailUsuario = $deletarUsuario->getEmail();
+
+        }catch(IdNaoEncontratoException $e){
+            echo PHP_EOL. $e->getMessage() .PHP_EOL;
+        }
+
         echo "\n| ";
-        echo "". $deletarUsuario->getNome() ." - " . $deletarUsuario->getEmail() ."\n";
+        echo "". $nomeUsuario ." - " . $emailUsuario ."\n";
         echo "+----------------------------+\n";
         echo "| > CONFIRME O USUÁRIO\n";
         echo "|   PARA CONTINUAR:\n";
@@ -221,6 +234,6 @@ class Menu{
             "2" => $this->excluir($usuarioRepository),
             "3" => '...',
         };
-}
+    }
 
 }
