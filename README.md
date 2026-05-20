@@ -30,15 +30,20 @@ O projeto utiliza:
 
 ```bash
 project/
+├── entity/
+│   └── UsuarioEntity.php
+│
+├── exceptions/
+│   ├── PaginacaoException.php
+│   └── IdNaoEncontradoException.php
+│
+├── repository/
+│   └── UsuarioRepository.php
 │
 ├── Database.php
-├── UsuarioEntity.php
-├── UsuarioRepository.php
 ├── Menu.php
-├── index.php
-└── .env
+└── Main.php
 ```
-
 ---
 
 # Funcionalidades
@@ -63,7 +68,7 @@ O sistema permite:
 
 ---
 
-# Schema do Banco
+## Schema do Banco
 
 ```sql
 CREATE DATABASE phpbanco;
@@ -78,7 +83,7 @@ CREATE TABLE usuarios(
 
 ---
 
-# Dados iniciais
+## Dados iniciais
 
 ```sql
 INSERT INTO usuarios (nome, email, senha)
